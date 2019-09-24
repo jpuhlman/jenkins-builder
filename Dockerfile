@@ -40,6 +40,7 @@ RUN cd mvgit; make prefix=/usr install
 RUN rm -rf mvgit
 COPY init.sh /
 RUN chmod 755 /init.sh
+ENV INSTALL_PLUGINS 1
 # Intentionally not switch to root so init can do some setup magic.
 ENTRYPOINT ["/init.sh"]
 

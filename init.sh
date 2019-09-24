@@ -18,9 +18,9 @@ if [ -e "/var/run/docker.sock" ] ; then
    fi
 fi
 /usr/bin/add-koji-cert.sh
-if [ -e /usr/share/jenkins/ref/plugins.txt ] ; then
+chown $USERID.$USERGID $JENKINS_HOME
+if [ -e /usr/share/jenkins/ref/plugins.txt -a "$INSTALL_PLUGINS" = "1" ] ; then
    sudo -E -u jenkins HOME=$JENKINS_HOME PATH=$PATH /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 fi
 
-chown $USERID.$USERGID $JENKINS_HOME
 exec /sbin/tini -- sudo -E -u jenkins HOME=$JENKINS_HOME PATH=$PATH /usr/local/bin/jenkins.sh 
