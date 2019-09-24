@@ -30,8 +30,8 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 # Add script for configuring koji certificates
 COPY add-koji-cert.sh /usr/bin/
 RUN chmod 755 /usr/bin/add-koji-cert.sh
-COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 USER jenkins
+COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 USER root
 RUN git clone https://github.com/jpuhlman/mvgit.git 
