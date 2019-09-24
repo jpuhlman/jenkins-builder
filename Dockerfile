@@ -34,6 +34,10 @@ COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 USER jenkins
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 USER root
+RUN git clone https://github.com/jpuhlman/mvgit.git 
+RUN cd mvgit; make prefix=/usr
+RUN cd mvgit; make prefix=/usr install
+RUN rm -rf mvgit
 COPY init.sh /
 RUN chmod 755 /init.sh
 # Intentionally not switch to root so init can do some setup magic.
