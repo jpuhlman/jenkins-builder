@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+
 
 if [ -z "$USERGID" ] ; then
    USERGID=1000
