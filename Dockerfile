@@ -1,4 +1,4 @@
-From jenkins/jenkins:lts
+From jenkins/jenkins:2.190.1
 USER root
 RUN echo
 RUN apt-get update
