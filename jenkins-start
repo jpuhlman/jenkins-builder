@@ -1,0 +1,33 @@
+#!/bin/bash
+if [ ! -e ~/.jenkins ] ; then
+    echo "Need to create ~/.jenkins file to configure"
+    exit 1
+else
+    source ~/.jenkins
+fi
+if [ -z "$PORT" ] ; then
+	PORT=8080
+fi
+USERID=$(id -u)
+mkdir -p ~/jenkins_home
+export SYSTEM_TZ=$(echo $(basename $(dirname $(readlink /etc/localtime)))/$(basename $(readlink /etc/localtime)))
+JENKINS_HOME=~/jenkins_home
+JENKINS_USER=1000
+CONTAINER=jpuhlman/jenkins-builder:centos8
+CONTAINER_NAME=jenkins-builder
+sudo chown $JENKINS_USER.$JENKINS_USER $JENKINS_HOME
+docker stop $CONTAINER_NAME
+docker rm $CONTAINER_NAME
+docker run -it \
+    -p $PORT:8080 \
+    --restart=always \
+    --name=jenkins-jp \
+    --env TZ=$SYSTEM_TZ \
+    --env USERID=$USERID \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    --security-opt seccomp:unconfined \
+    --security-opt label:disable \
+    -v $JENKINS_HOME:/var/jenkins_home \
+    $CONTAINER
+
+
