@@ -1,4 +1,4 @@
-From jenkins/jenkins:lts-centos
+From jenkins/jenkins:centos7
 USER root
 RUN yum update -y
 RUN yum install -y yum-utils
@@ -28,10 +28,11 @@ RUN yum install -y sudo \
 	wget \
 	chrpath \
 	perl-Data-Dumper
-RUN yum install -y --nobest \
+RUN yum install -y  \
 	docker-ce \
 	docker-ce-cli \
-	containerd.io 
+	containerd.io \
+    python3-packaging
 #RUN apt-get update
 #RUN apt-get install -y \
 #    lynx \
