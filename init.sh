@@ -30,4 +30,4 @@ if [ -n "$(cat $PLUGINS)" ] ; then
     sudo -E -u jenkins HOME=$JENKINS_HOME PATH=$PATH /usr/local/bin/install-plugins.sh < $PLUGINS
 fi
 rm -f $PLUGINS
-exec /sbin/tini -- sudo -E -u jenkins HOME=$JENKINS_HOME PATH=$PATH /usr/local/bin/jenkins.sh 
+exec sudo -E -u jenkins HOME=$JENKINS_HOME PATH=$PATH /usr/local/bin/jenkins.sh 

@@ -1,4 +1,4 @@
-From jenkins/jenkins:lts
+From jenkins/jenkins:2.393
 USER root
 RUN echo
 RUN apt-get update
@@ -9,12 +9,12 @@ RUN apt-get install -y \
     cpio \
     diffstat \
     gawk \
-    koji-client \
-    python-krbv \
     sudo \
     apt-transport-https \
     ca-certificates \    
     curl \
+    tini \
+    rsync \
     software-properties-common \
     locales
 # Make sure docker works in container
@@ -32,7 +32,7 @@ COPY add-koji-cert.sh /usr/bin/
 RUN chmod 755 /usr/bin/add-koji-cert.sh
 USER jenkins
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
-RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
+#RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 USER root
 RUN git clone https://github.com/jpuhlman/mvgit.git 
 RUN cd mvgit; make prefix=/usr
