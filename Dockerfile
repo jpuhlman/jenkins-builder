@@ -15,8 +15,11 @@ RUN apt-get install -y \
     curl \
     tini \
     rsync \
+    wget \
+    python2 \
     software-properties-common \
     locales
+RUN ln -s /usr/bin/python2 /usr/bin/python
 # Make sure docker works in container
 RUN apt install -y apt-transport-https ca-certificates curl software-properties-common
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
