@@ -17,6 +17,7 @@ RUN apt-get install -y \
     rsync \
     wget \
     python2 \
+    python3-packaging \
     software-properties-common \
     locales
 RUN ln -s /usr/bin/python2 /usr/bin/python
